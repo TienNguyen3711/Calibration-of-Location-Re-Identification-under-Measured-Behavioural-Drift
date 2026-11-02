@@ -1,0 +1,76 @@
+users            182
+files read       18,669  (dropped by name: 1)
+point lines      24,876,975
+unparseable      1
+occupied 30-min bins written  84,741  (compression 293.6x)
+bins outside the Beijing box (39.0, 41.2, 115.0, 117.6): 11,898 (14.04%)
+
+users 182; occupied 30-min bins 84,741
+
+Per-user coverage after the 30-minute dedup
+  quantity                        min     p25  median     p75      max
+  occupied bins                   2.0    43.2   128.5   445.5   6987.0
+  active days                     1.0     7.0    21.5    63.0   1251.0
+  span in days                    1.0    11.0    71.5   168.2   1934.0
+  bins per ACTIVE day             1.5     4.5     6.7     9.2     23.0
+
+  For comparison, YJMob100K Dataset 2 gives every user 48 possible slots a day and
+  about 1,176 records over 75 days. GeoLife's median user has 6.7 bins per
+  active day: it logs TRIPS, not presence. This is the central Arm C representation issue.
+
+CALENDAR scheme: how many users are simultaneously active?
+   window L  best start (day idx)  users with >=1 bin  >=20 bins  >=40 bins
+         28                   745                  41         37         29
+         56                   710                  52         44         38
+         90                   689                  60         59         54
+        180                   591                  75         70         66
+
+RELATIVE scheme, anchored on each user's FIRST active day
+  ref = [a, a+L), tgt = [a+L+g, a+2L+g); usable = BOTH windows hold >= Kmin bins
+  Kmin = 20 bins per window
+    L \ g        0      28      90     180     365
+       28        72      57      30      14       7
+       56        67      49      36      19       9
+       90        54      46      26      14       8
+      180        30      27      18      13       9
+  Kmin = 40 bins per window
+    L \ g        0      28      90     180     365
+       28        57      42      27      12       7
+       56        56      39      27      16       7
+       90        45      44      23      13       8
+      180        26      23      16      12       8
+
+RELATIVE scheme, anchored on each user's DENSEST L-day stretch
+  ref = [a, a+L), tgt = [a+L+g, a+2L+g); usable = BOTH windows hold >= Kmin bins
+  Kmin = 20 bins per window
+    L \ g        0      28      90     180     365
+       28        69      44      24       9       3
+       56        56      40      17       8       3
+       90        43      28      11       5       2
+      180        15      11       7       3       2
+  Kmin = 40 bins per window
+    L \ g        0      28      90     180     365
+       28        56      33      22       8       3
+       56        47      30      13       7       3
+       90        37      27       9       5       2
+      180        13      10       6       3       2
+
+================================================================================================
+CALENDAR scheme, BOTH windows: ref = [s, s+L), tgt = [s+L+g, s+2L+g), same s for everyone
+================================================================================================
+  the start s is chosen to MAXIMISE usable users, which is a design choice made on
+  coverage only -- no outcome is involved, so it does not select on the result
+
+  Kmin = 20 bins per window
+    L \\ g           0         28         90        180        365
+       28     31@d745     26@d640     20@d780     12@d647      6@d584  
+       56     33@d717     29@d745     21@d724     12@d619      6@d514  
+       90     36@d689     32@d689     23@d689     13@d584      6@d486  
+      180     36@d500     33@d493     25@d598     14@d493      7@d101  
+
+  Kmin = 40 bins per window
+    L \\ g           0         28         90        180        365
+       28     29@d654     25@d773     19@d780     10@d647      5@d549  
+       56     31@d724     28@d745     20@d724     11@d626      5@d521  
+       90     33@d696     29@d696     21@d696     12@d591      5@d486  
+      180     35@d507     30@d605     23@d605     12@d542      7@d430  

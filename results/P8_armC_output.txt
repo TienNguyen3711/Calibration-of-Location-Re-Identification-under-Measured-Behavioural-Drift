@@ -1,0 +1,175 @@
+
+################ cell/L/g/Kmin/scheme = 500 56 0 40 relative
+=== Arm C (GeoLife) | cell 500 m | L 56 d | g 0 d | Kmin 40 | relative ===
+usable users: 56 of 182  (both windows >= 40 bins AND >= 5 bins in each of the four window x half groups)
+  RM: bins/user median   97.5 (min 14, max 462);  distinct cells median  42.0
+  RD: bins/user median  119.0 (min 19, max 492);  distinct cells median  43.5
+  TM: bins/user median   67.0 (min 18, max 437);  distinct cells median  24.5
+  TD: bins/user median   68.0 (min 22, max 383);  distinct cells median  32.5
+
+matcher: top-1 0.7321 (41/56)  top-3 0.8750  median rank 1  (pool = 56, so chance top-1 = 0.0179)
+
+drift vs outcome, with bootstrap 95% CI (n = 56); Arm A/B values beside them
+  component    r(dec,y)             95% CI  r(dec,c)  r(dec,cou)  armA r(dec,y)    armB
+  js_cells       -0.423 [ -0.620, -0.193]    -0.238      +0.783         -0.537  -0.315
+  dissim         -0.276 [ -0.487, -0.035]    -0.097      +0.657         -0.434       -
+  anchor         -0.116 [ -0.362, +0.142]    -0.263      +0.433         -0.222       -
+  novelty        -0.393 [ -0.585, -0.169]    -0.271      +0.819         -0.436       -
+  d_entropy      -0.128 [ -0.366, +0.118]    -0.044      +0.280         -0.128       -
+  js_slots       -0.148 [ -0.390, +0.099]    -0.030      +0.758         -0.163       -
+
+  r(drift, coverage) = -0.283   mean JS drift = 0.733 (Arm A 0.702, Arm B 0.593)
+
+CALIBRATION IS NOT REPORTED for Arm C: with a pool of 56 the Platt model would be fitted
+  on about 28 users containing roughly 20 correct matches. P6 showed a
+  1,000-user pool is already degenerate for calibration; this is two orders smaller.
+
+################ cell/L/g/Kmin/scheme = 250 56 0 40 relative
+=== Arm C (GeoLife) | cell 250 m | L 56 d | g 0 d | Kmin 40 | relative ===
+usable users: 56 of 182  (both windows >= 40 bins AND >= 5 bins in each of the four window x half groups)
+  RM: bins/user median   97.5 (min 14, max 462);  distinct cells median  57.5
+  RD: bins/user median  119.0 (min 19, max 492);  distinct cells median  60.5
+  TM: bins/user median   67.0 (min 18, max 437);  distinct cells median  31.0
+  TD: bins/user median   68.0 (min 22, max 383);  distinct cells median  38.5
+
+matcher: top-1 0.7500 (42/56)  top-3 0.9107  median rank 1  (pool = 56, so chance top-1 = 0.0179)
+
+drift vs outcome, with bootstrap 95% CI (n = 56); Arm A/B values beside them
+  component    r(dec,y)             95% CI  r(dec,c)  r(dec,cou)  armA r(dec,y)    armB
+  js_cells       -0.378 [ -0.580, -0.140]    -0.388      +0.792         -0.537  -0.315
+  dissim         -0.352 [ -0.564, -0.107]    -0.292      +0.665         -0.434       -
+  anchor         -0.021 [ -0.275, +0.248]    -0.137      +0.423         -0.222       -
+  novelty        -0.302 [ -0.531, -0.044]    -0.367      +0.772         -0.436       -
+  d_entropy      -0.051 [ -0.329, +0.240]    -0.032      +0.278         -0.128       -
+  js_slots       -0.281 [ -0.505, -0.027]    -0.197      +0.758         -0.163       -
+
+  r(drift, coverage) = -0.321   mean JS drift = 0.791 (Arm A 0.702, Arm B 0.593)
+
+CALIBRATION IS NOT REPORTED for Arm C: with a pool of 56 the Platt model would be fitted
+  on about 28 users containing roughly 21 correct matches. P6 showed a
+  1,000-user pool is already degenerate for calibration; this is two orders smaller.
+
+################ cell/L/g/Kmin/scheme = 1000 56 0 40 relative
+=== Arm C (GeoLife) | cell 1000 m | L 56 d | g 0 d | Kmin 40 | relative ===
+usable users: 56 of 182  (both windows >= 40 bins AND >= 5 bins in each of the four window x half groups)
+  RM: bins/user median   97.5 (min 14, max 462);  distinct cells median  28.0
+  RD: bins/user median  119.0 (min 19, max 492);  distinct cells median  30.0
+  TM: bins/user median   67.0 (min 18, max 437);  distinct cells median  21.0
+  TD: bins/user median   68.0 (min 22, max 383);  distinct cells median  23.0
+
+matcher: top-1 0.6071 (34/56)  top-3 0.8036  median rank 1  (pool = 56, so chance top-1 = 0.0179)
+
+drift vs outcome, with bootstrap 95% CI (n = 56); Arm A/B values beside them
+  component    r(dec,y)             95% CI  r(dec,c)  r(dec,cou)  armA r(dec,y)    armB
+  js_cells       -0.480 [ -0.672, -0.249]    -0.199      +0.790         -0.537  -0.315
+  dissim         -0.348 [ -0.559, -0.102]    -0.212      +0.734         -0.434       -
+  anchor         -0.087 [ -0.342, +0.181]    -0.017      +0.384         -0.222       -
+  novelty        -0.320 [ -0.557, -0.046]    -0.137      +0.810         -0.436       -
+  d_entropy      -0.163 [ -0.428, +0.120]    -0.256      +0.242         -0.128       -
+  js_slots       -0.294 [ -0.523, -0.051]    -0.194      +0.758         -0.163       -
+
+  r(drift, coverage) = -0.255   mean JS drift = 0.673 (Arm A 0.702, Arm B 0.593)
+
+CALIBRATION IS NOT REPORTED for Arm C: with a pool of 56 the Platt model would be fitted
+  on about 28 users containing roughly 17 correct matches. P6 showed a
+  1,000-user pool is already degenerate for calibration; this is two orders smaller.
+
+################ cell/L/g/Kmin/scheme = 500 90 0 20 calendar
+=== Arm C (GeoLife) | cell 500 m | L 90 d | g 0 d | Kmin 20 | calendar ===
+usable users: 36 of 182  (both windows >= 20 bins AND >= 5 bins in each of the four window x half groups)
+  RM: bins/user median   90.5 (min 13, max 536);  distinct cells median  33.5
+  RD: bins/user median   84.5 (min 6, max 494);  distinct cells median  37.5
+  TM: bins/user median  213.5 (min 23, max 622);  distinct cells median  66.5
+  TD: bins/user median  207.0 (min 6, max 624);  distinct cells median  66.5
+
+matcher: top-1 0.7778 (28/36)  top-3 0.8611  median rank 1  (pool = 36, so chance top-1 = 0.0278)
+
+drift vs outcome, with bootstrap 95% CI (n = 36); Arm A/B values beside them
+  component    r(dec,y)             95% CI  r(dec,c)  r(dec,cou)  armA r(dec,y)    armB
+  js_cells       -0.129 [ -0.484, +0.257]    -0.050      +0.814         -0.537  -0.315
+  dissim         -0.045 [ -0.389, +0.310]    -0.175      +0.758         -0.434       -
+  anchor         -0.152 [ -0.438, +0.181]    +0.071      +0.349         -0.222       -
+  novelty        -0.006 [ -0.416, +0.399]    +0.019      +0.919         -0.436       -
+  d_entropy      -0.090 [ -0.377, +0.194]    -0.063      +0.535         -0.128       -
+  js_slots       -0.225 [ -0.597, +0.232]    +0.062      +0.825         -0.163       -
+
+  r(drift, coverage) = -0.403   mean JS drift = 0.762 (Arm A 0.702, Arm B 0.593)
+
+CALIBRATION IS NOT REPORTED for Arm C: with a pool of 36 the Platt model would be fitted
+  on about 18 users containing roughly 14 correct matches. P6 showed a
+  1,000-user pool is already degenerate for calibration; this is two orders smaller.
+
+################ cell/L/g/Kmin/scheme = 500 56 28 40 relative
+=== Arm C (GeoLife) | cell 500 m | L 56 d | g 28 d | Kmin 40 | relative ===
+usable users: 39 of 182  (both windows >= 40 bins AND >= 5 bins in each of the four window x half groups)
+  RM: bins/user median   98.0 (min 14, max 318);  distinct cells median  38.0
+  RD: bins/user median  118.0 (min 31, max 360);  distinct cells median  38.0
+  TM: bins/user median   79.0 (min 16, max 421);  distinct cells median  35.0
+  TD: bins/user median   83.0 (min 11, max 395);  distinct cells median  34.0
+
+matcher: top-1 0.5897 (23/39)  top-3 0.7692  median rank 1  (pool = 39, so chance top-1 = 0.0256)
+
+drift vs outcome, with bootstrap 95% CI (n = 39); Arm A/B values beside them
+  component    r(dec,y)             95% CI  r(dec,c)  r(dec,cou)  armA r(dec,y)    armB
+  js_cells       -0.514 [ -0.731, -0.237]    -0.171      +0.887         -0.537  -0.315
+  dissim         -0.440 [ -0.666, -0.146]    +0.027      +0.832         -0.434       -
+  anchor         -0.249 [ -0.543, +0.058]    -0.224      +0.538         -0.222       -
+  novelty        -0.496 [ -0.710, -0.213]    -0.195      +0.793         -0.436       -
+  d_entropy      -0.042 [ -0.382, +0.286]    -0.030      +0.254         -0.128       -
+  js_slots       -0.130 [ -0.438, +0.203]    +0.064      +0.797         -0.163       -
+
+  r(drift, coverage) = -0.258   mean JS drift = 0.762 (Arm A 0.702, Arm B 0.593)
+
+CALIBRATION IS NOT REPORTED for Arm C: with a pool of 39 the Platt model would be fitted
+  on about 19 users containing roughly 11 correct matches. P6 showed a
+  1,000-user pool is already degenerate for calibration; this is two orders smaller.
+
+################ cell/L/g/Kmin/scheme = 500 56 90 40 relative
+=== Arm C (GeoLife) | cell 500 m | L 56 d | g 90 d | Kmin 40 | relative ===
+usable users: 27 of 182  (both windows >= 40 bins AND >= 5 bins in each of the four window x half groups)
+  RM: bins/user median  157.0 (min 32, max 318);  distinct cells median  58.0
+  RD: bins/user median  173.0 (min 31, max 360);  distinct cells median  56.0
+  TM: bins/user median  106.0 (min 16, max 395);  distinct cells median  42.0
+  TD: bins/user median   82.0 (min 23, max 428);  distinct cells median  41.0
+
+matcher: top-1 0.4815 (13/27)  top-3 0.6667  median rank 2  (pool = 27, so chance top-1 = 0.0370)
+
+drift vs outcome, with bootstrap 95% CI (n = 27); Arm A/B values beside them
+  component    r(dec,y)             95% CI  r(dec,c)  r(dec,cou)  armA r(dec,y)    armB
+  js_cells       -0.428 [ -0.719, -0.067]    -0.040      +0.932         -0.537  -0.315
+  dissim         -0.381 [ -0.677, -0.010]    -0.059      +0.851         -0.434       -
+  anchor         -0.559 [ -0.852, -0.223]    -0.039      +0.613         -0.222       -
+  novelty        -0.481 [ -0.745, -0.125]    -0.086      +0.923         -0.436       -
+  d_entropy      -0.076 [ -0.483, +0.336]    +0.255      +0.358         -0.128       -
+  js_slots       -0.114 [ -0.506, +0.298]    -0.291      +0.822         -0.163       -
+
+  r(drift, coverage) = -0.281   mean JS drift = 0.799 (Arm A 0.702, Arm B 0.593)
+
+CALIBRATION IS NOT REPORTED for Arm C: with a pool of 27 the Platt model would be fitted
+  on about 13 users containing roughly 6 correct matches. P6 showed a
+  1,000-user pool is already degenerate for calibration; this is two orders smaller.
+
+################ cell/L/g/Kmin/scheme = 500 28 0 20 relative
+=== Arm C (GeoLife) | cell 500 m | L 28 d | g 0 d | Kmin 20 | relative ===
+usable users: 69 of 182  (both windows >= 20 bins AND >= 5 bins in each of the four window x half groups)
+  RM: bins/user median   62.0 (min 11, max 225);  distinct cells median  26.0
+  RD: bins/user median   67.0 (min 6, max 260);  distinct cells median  25.0
+  TM: bins/user median   50.0 (min 11, max 237);  distinct cells median  22.0
+  TD: bins/user median   50.0 (min 12, max 232);  distinct cells median  22.0
+
+matcher: top-1 0.5652 (39/69)  top-3 0.8116  median rank 1  (pool = 69, so chance top-1 = 0.0145)
+
+drift vs outcome, with bootstrap 95% CI (n = 69); Arm A/B values beside them
+  component    r(dec,y)             95% CI  r(dec,c)  r(dec,cou)  armA r(dec,y)    armB
+  js_cells       -0.339 [ -0.544, -0.117]    -0.139      +0.847         -0.537  -0.315
+  dissim         -0.266 [ -0.488, -0.026]    -0.093      +0.642         -0.434       -
+  anchor         -0.104 [ -0.347, +0.124]    -0.103      +0.445         -0.222       -
+  novelty        -0.338 [ -0.548, -0.110]    -0.098      +0.810         -0.436       -
+  d_entropy      +0.097 [ -0.133, +0.338]    -0.128      +0.344         -0.128       -
+  js_slots       -0.324 [ -0.537, -0.094]    -0.240      +0.703         -0.163       -
+
+  r(drift, coverage) = -0.339   mean JS drift = 0.735 (Arm A 0.702, Arm B 0.593)
+
+CALIBRATION IS NOT REPORTED for Arm C: with a pool of 69 the Platt model would be fitted
+  on about 34 users containing roughly 19 correct matches. P6 showed a
+  1,000-user pool is already degenerate for calibration; this is two orders smaller.
