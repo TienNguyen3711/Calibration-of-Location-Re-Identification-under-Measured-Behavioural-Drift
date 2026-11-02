@@ -1,0 +1,56 @@
+users with all four (window x half) groups: 24,517 of 24,999
+
+matcher (M half, cosine on IDF-weighted Hellinger cell profiles, pool = 24,517)
+  top-1 accuracy 0.7128   top-10 0.9230   median rank of true user 1
+  score s1 mean 0.537   margin confidence mean 0.227
+
+Spearman correlations (n = 24517). c = margin confidence, y = top-1 correct.
+
+component    r(d_dec,c)  r(d_cou,c)  r(d_dec,y)  r(d_cou,y)  r(dec,cou)  r(d_dec,cov)
+-------------------------------------------------------------------------------------
+js_cells         -0.415      -0.475      -0.537      -0.602       0.917        -0.218
+dissim           -0.339      -0.406      -0.434      -0.509       0.765        -0.125
+anchor           -0.135      -0.151      -0.222      -0.239       0.524        -0.033
+novelty          -0.344      -0.375      -0.436      -0.475       0.864        -0.230
+d_entropy        -0.086      -0.100      -0.128      -0.139       0.351        -0.041
+js_slots         -0.120      -0.123      -0.163      -0.166       0.719        -0.484
+
+composite        -0.391      -0.443      -0.508      -0.563       0.845        -0.303
+
+coverage check: r(coverage_D, c) = 0.168, r(coverage_M, c) = 0.163, r(cov_D, cov_M) = 0.897
+
+saved results/p2_vars_dataset2.npz
+
+======================================================================================
+Placebo: each user keeps their own score but is given ANOTHER user's drift
+======================================================================================
+  js_cells (decoupled)     r(d,c) real -0.415  shuffled +0.0008 (sd 0.0059, max|.| 0.0128)
+                           r(d,y) real -0.537  shuffled +0.0004 (sd 0.0047)
+  composite (decoupled)    r(d,c) real -0.391  shuffled -0.0001 (sd 0.0073, max|.| 0.0128)
+                           r(d,y) real -0.508  shuffled -0.0017 (sd 0.0082)
+
+======================================================================================
+Preliminary nested fit for y (this is O2; shown here only as a smell test)
+======================================================================================
+  model                              log-lik     AUC   Brier   coefficients
+  c alone                            -0.4476  0.8289  0.1480   [1.455 1.714]
+  c + coverage                       -0.4426  0.8335  0.1463   [1.475 1.691 0.269]
+  c + coverage + drift DECOUPLED     -0.3632  0.8952  0.1186   [ 1.794  1.541  0.002 -1.308]
+  c + coverage + drift COUPLED       -0.3383  0.9103  0.1103   [ 1.934  1.482 -0.03  -1.611]
+
+  reliability of the drift measure (two disjoint day sets, same person):
+    test-retest r(js_cells odd days, js_cells even days) = 0.917
+
+  NOTE: c is a margin SCORE, not a probability (mean 0.227 vs accuracy 0.713).
+  Its raw Brier is therefore not a miscalibration measure. O1 needs a probability output.
+
+  reliability-diagram deciles of the raw margin score:
+    0.0-0.1 | n= 6461 | mean c 0.047 | accuracy 0.377
+    0.1-0.2 | n= 5423 | mean c 0.149 | accuracy 0.639
+    0.2-0.3 | n= 4798 | mean c 0.249 | accuracy 0.838
+    0.3-0.4 | n= 3989 | mean c 0.348 | accuracy 0.946
+    0.4-0.5 | n= 2551 | mean c 0.445 | accuracy 0.978
+    0.5-0.6 | n=  983 | mean c 0.541 | accuracy 0.988
+    0.6-0.7 | n=  251 | mean c 0.636 | accuracy 0.996
+    0.7-0.8 | n=   55 | mean c 0.738 | accuracy 1.000
+    0.8-0.9 | n=    6 | mean c 0.834 | accuracy 1.000
