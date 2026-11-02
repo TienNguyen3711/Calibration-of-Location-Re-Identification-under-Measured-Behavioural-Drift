@@ -442,3 +442,18 @@ Until all six hold, results are internal and the claim in §0 stays conditional.
   real out-of-sample gain but not an exogenous rarity signal. Nothing was refitted; user order was
   verified against the stored run at `max|Δ| = 0` in both arms, and the C2b number reproduces
   (+0.0307 here against +0.0292 published at g = 0).
+
+- **2026-11-02, the O3 control (S4) and the second matcher family.** The missing
+  equal-magnitude, drift-preserving control was built and run (`results/S4_CONTROL.md`). The M
+  half is perturbed by Dirichlet mixing over each user's own support, bisected to match S2-NN's
+  top-1 (0.4966 against 0.4943), while the D half is left real so measured drift is unchanged by
+  construction and verified at `max|d_app - d_own| = 0.000e+00`. Transported-calibrator ECE
+  **0.0383** against S2-NN's **0.1609**, ratio **0.238**, pre-registered threshold 0.5:
+  **SURVIVES**. Generic profile disruption no longer explains the O3 §7 result. Two
+  qualifications are recorded rather than smoothed: the sweep's worst point reaches 0.477 of S2's
+  figure, so the separation is twofold at worst, not fourfold; and the secondary check I
+  pre-registered in that script was **mis-specified** -- I justified it by "`d_app` is constant by
+  construction", which is false (`d_app` equals each user's own varying drift), so its failure at
+  b = -0.0413 is the paper's main effect reappearing inside the control, not a broken
+  construction. The property that rule meant to protect is verified separately and exactly.
+  O3's own pre-registered verdict stays INCONCLUSIVE, since S1 still disagrees with S2.

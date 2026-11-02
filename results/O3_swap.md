@@ -241,3 +241,22 @@ not attack power — so the two are not directly comparable, and the contrast mu
 Until that control exists, the honest statement is: **the amended analysis is consistent with
 applied drift causing transported-calibrator failure, and rules out the recipient's own drift as the
 explanation, but does not yet rule out generic profile disruption.**
+
+---
+
+## 8. Generic profile disruption is now ruled out (added 2026-11-02)
+
+The control this section called for exists: [`S4_CONTROL.md`](S4_CONTROL.md). Perturbing the
+matcher's input until top-1 falls to **0.4966**, matching S2-NN's 0.4943, while leaving the
+drift half untouched (`max|d_app - d_own| = 0.000e+00`), costs a transported-calibrator ECE of
+**0.0383** against S2-NN's **0.1609** -- a ratio of **0.238** against a pre-registered threshold
+of 0.5. **Verdict: SURVIVES.** The collapse is not explained by the swapped world merely being
+harder.
+
+Two qualifications carried from that file: at the worst point of the lambda ladder a
+structureless perturbation reaches 0.0767, which is **0.477** of S2's figure, so the separation
+is about twofold rather than fourfold; and the secondary check pre-registered in `s4_control.py`
+failed because I specified it on a false premise, which S4_CONTROL.md §4.2 states in full.
+
+The pre-registered verdict of **this** section is unchanged and remains **INCONCLUSIVE**: it was
+triggered by S1 and S2 disagreeing in direction, which S4 does not address.
