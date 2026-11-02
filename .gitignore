@@ -45,3 +45,12 @@ __pycache__/
 results/*.npz
 results/*.pkl
 results/*.tsv
+
+# ---------------------------------------------------------------------------
+# Prose records stay out of git (author's decision, 2026-11-02). The repository
+# carries the SCRIPTS and the RESULTS as text; the detailed written analyses --
+# the design contract, the pre-registrations, and one .md per premise or
+# objective explaining what each run means -- are kept with the manuscript
+# instead. Every number quoted in those documents comes from a results/*.txt
+# transcript that IS tracked here, so nothing in git depends on them.
+*.md
