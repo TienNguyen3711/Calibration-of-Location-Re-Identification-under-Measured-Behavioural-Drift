@@ -1,0 +1,131 @@
+=== atypicality baseline: armB_dataset1 ===
+profiles /private/tmp/claude-501/-Users-tiennguyen-Documents-Research-papers-Paper-4/cbcd47c7-c1a8-4242-afbf-3b3a8747f0fb/scratchpad/prof_d1.tsv
+record   results/cal_armB_dataset1.npz
+pool     24517  svd_dim 64  seed 20261102  bootstrap 2000
+
+pool: random subsample of 24,517 from 99,549 complete users (seed 20261102)
+alignment check  max|d coverage| = 0.000e+00   max|d js_cells| = 0.000e+00
+pool 24,517 users   cal 12,258   eval 12,259   top-1 0.9077
+
+a_pop   reference vocabulary 23,794 cells, 2,522,730 records; mean 9.339 sd 0.586 range [6.43, 12.50]
+a_knn   1 - mean(top-5 cosine); mean 0.5739 sd 0.1060
+a_maha  single Gaussian, tied cov, d = 64 (SVD captures 0.075 of reference energy); mean 66.4 median 54.0
+
+====================================================================================================
+correlations (tie-corrected Spearman, all users)
+====================================================================================================
+              r(.,y)    r(.,p)  r(.,cov)   r(.,js)  r(.,comp)
+  a_pop       +0.088    +0.211    +0.040    +0.036     +0.027
+  a_knn       -0.187    -0.273    -0.186    +0.741     +0.670
+  a_maha      -0.048    -0.212    -0.106    +0.083     +0.026
+  js_cells    -0.315    -0.604    -0.340         -     +0.920
+
+  pairwise among the atypicality estimators:
+    r(a_pop, a_knn) = +0.225
+    r(a_pop, a_maha) = -0.669
+    r(a_knn, a_maha) = -0.103
+
+====================================================================================================
+T1 - reliability by ATYPICALITY quintile (the shape of their Table 1), eval users
+     then the same table by DRIFT quintile, for comparison (this is our O1 4b)
+====================================================================================================
+
+  by a_pop
+  quintile       n   mean val  accuracy   mean p      gap     ECE   Brier
+  Q1          2452      8.551     0.878    0.889   -0.010  0.0151  0.0684
+  Q2          2452      9.043     0.887    0.889   -0.002  0.0147  0.0589
+  Q3          2451      9.322     0.911    0.901   +0.009  0.0147  0.0502
+  Q4          2452      9.614     0.929    0.913   +0.015  0.0208  0.0477
+  Q5          2452     10.176     0.951    0.940   +0.010  0.0132  0.0316
+
+  by a_knn
+  quintile       n   mean val  accuracy   mean p      gap     ECE   Brier
+  Q1          2452      0.423     0.949    0.949   -0.001  0.0101  0.0342
+  Q2          2452      0.515     0.954    0.953   +0.000  0.0086  0.0310
+  Q3          2451      0.574     0.946    0.943   +0.003  0.0144  0.0369
+  Q4          2452      0.634     0.912    0.908   +0.004  0.0108  0.0530
+  Q5          2452      0.720     0.796    0.780   +0.016  0.0199  0.1015
+
+  by a_maha
+  quintile       n   mean val  accuracy   mean p      gap     ECE   Brier
+  Q1          2452     14.961     0.945    0.940   +0.005  0.0119  0.0337
+  Q2          2452     34.319     0.914    0.905   +0.009  0.0126  0.0489
+  Q3          2451     54.296     0.898    0.893   +0.004  0.0165  0.0600
+  Q4          2452     81.097     0.903    0.893   +0.010  0.0165  0.0546
+  Q5          2452    146.594     0.896    0.903   -0.007  0.0114  0.0595
+
+  by js_cells (drift, ours)
+  quintile       n   mean val  accuracy   mean p      gap     ECE   Brier
+  Q1          2452      0.385     0.985    0.985   -0.001  0.0024  0.0107
+  Q2          2452      0.509     0.978    0.969   +0.009  0.0110  0.0170
+  Q3          2451      0.593     0.958    0.946   +0.012  0.0137  0.0291
+  Q4          2452      0.678     0.912    0.899   +0.013  0.0159  0.0599
+  Q5          2452      0.794     0.724    0.734   -0.010  0.0225  0.1401
+
+  by comp (composite drift, ours)
+  quintile       n   mean val  accuracy   mean p      gap     ECE   Brier
+  Q1          2452      0.194     0.984    0.981   +0.003  0.0045  0.0115
+  Q2          2452      0.356     0.976    0.967   +0.009  0.0109  0.0172
+  Q3          2451      0.489     0.953    0.942   +0.011  0.0116  0.0337
+  Q4          2452      0.631     0.908    0.896   +0.012  0.0162  0.0633
+  Q5          2452      0.820     0.735    0.748   -0.014  0.0194  0.1311
+
+====================================================================================================
+T2 - PRIMARY. Nested dAUC on eval users. base = [z(p_platt), z(log coverage)],
+     identical to the C2b fit in sweeps.py. Bootstrap: eval users resampled, the
+     coefficients stay fitted on the (unresampled) calibration half.
+====================================================================================================
+
+  model                           AUC      NLL
+  base (conf + coverage)       0.9388   0.1799
+  base + a_pop                 0.9357   0.1782
+  base + a_knn                 0.9390   0.1799
+  base + a_maha                0.9375   0.1794
+  base + atyp (all 3)          0.9359   0.1783
+  base + drift (js_cells)      0.9343   0.1765
+  base + atyp + drift          0.9402   0.1678
+
+  increment                                          dAUC              95% CI
+  atypicality (all 3) | base                      -0.0030  [-0.0059,-0.0004]  CI excludes 0
+  drift | base   [the published C2b number]       -0.0045  [-0.0083,-0.0008]  CI excludes 0
+  *** drift | base + atypicality  PRIMARY         +0.0043  [+0.0002,+0.0087]  CI excludes 0
+  atypicality | base + drift                      +0.0058  [+0.0026,+0.0091]  CI excludes 0
+  a_pop | base                                    -0.0031  [-0.0060,-0.0006]  CI excludes 0
+  a_knn | base                                    +0.0002  [-0.0001,+0.0004]
+  a_maha | base                                   -0.0013  [-0.0023,-0.0004]  CI excludes 0
+
+====================================================================================================
+T3 - the calibration residual (y - p_platt) on eval users, OLS on z-scored covariates.
+     A negative coefficient means: more of this -> the calibrator is overconfident.
+====================================================================================================
+
+  model: a_pop
+    (intercept)     +0.0044  [+0.0002,+0.0085]  *
+    a_pop           +0.0079  [+0.0039,+0.0118]  *
+
+  model: a_knn
+    (intercept)     +0.0044  [+0.0002,+0.0085]  *
+    a_knn           +0.0060  [+0.0014,+0.0108]  *
+
+  model: a_maha
+    (intercept)     +0.0044  [+0.0002,+0.0085]  *
+    a_maha          -0.0045  [-0.0085,-0.0005]  *
+
+  model: js_cells
+    (intercept)     +0.0044  [+0.0002,+0.0085]  *
+    js_cells        -0.0046  [-0.0096,+0.0004]
+
+  model: a_pop + a_knn + a_maha
+    (intercept)     +0.0044  [+0.0002,+0.0085]  *
+    a_pop           +0.0071  [+0.0016,+0.0122]  *
+    a_knn           +0.0044  [-0.0005,+0.0096]
+    a_maha          +0.0005  [-0.0046,+0.0054]
+
+  model: a_pop + a_knn + a_maha + js_cells
+    (intercept)     +0.0044  [+0.0002,+0.0085]  *
+    a_pop           +0.0054  [-0.0001,+0.0106]
+    a_knn           +0.0189  [+0.0115,+0.0261]  *
+    a_maha          +0.0021  [-0.0030,+0.0072]
+    js_cells        -0.0188  [-0.0263,-0.0117]  *
+
+saved results/atyp_armB_dataset1.npz
