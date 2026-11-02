@@ -1,0 +1,59 @@
+=== armA_dataset2 ===
+users present in all 10 (window x half) groups: 23,763; pool used: 23,763
+
+====================================================================================================
+P3 - does drift vary at FIXED gap, and is drift collinear with gap?
+====================================================================================================
+   gap  ref   top-1  mean JS   sd JS    p10    p90  r(JS,p)  ECE(ev)
+     0   W3  0.7147    0.703   0.144  0.507  0.882   -0.656   0.0154
+    15   W2  0.7333    0.708   0.142  0.514  0.884   -0.662   0.0100
+    30   W1  0.7209    0.701   0.145  0.502  0.881   -0.665   0.0119
+    45   W0  0.7088    0.712   0.143  0.516  0.889   -0.663   0.0154
+
+  pooled over all four gaps: r(JS drift, gap) = +0.016
+  mean WITHIN-gap sd of JS drift = 0.143; BETWEEN-gap sd of the means = 0.005  -> within/between = 31.3x
+  at the primary g = 0 the gap is constant by construction, and JS drift still spans [0.002, 1.000]
+
+  day 27 exposure (Data Descriptor advises excluding it; it falls in W1, used at g = 30):
+    g=0   ref=W3: 0 of 5,747,536 records (0.00%) fall on day 27
+    g=15  ref=W2: 0 of 5,828,884 records (0.00%) fall on day 27
+    g=30  ref=W1: 258,732 of 5,830,451 records (4.44%) fall on day 27
+    g=45  ref=W0: 0 of 5,738,226 records (0.00%) fall on day 27
+
+  nested fit WITHIN each gap stratum (does drift add beyond confidence + coverage?):
+   gap  AUC c+cov  AUC +drift    dAUC  LL c+cov  LL +drift
+     0     0.8606      0.8898 +0.0292   -0.4203    -0.3733
+    15     0.8633      0.8906 +0.0273   -0.4063    -0.3616
+    30     0.8615      0.8920 +0.0304   -0.4139    -0.3655
+    45     0.8599      0.8853 +0.0255   -0.4217    -0.3811
+
+====================================================================================================
+P6 - sensitivity to pool size (confidence is pool-dependent by construction)
+====================================================================================================
+     pool   top-1      ECE    Brier      T  r(JS,p)  gap in top JS bin  n in bin
+    1,000  0.9310   0.0330   0.0451  0.020   -0.767             -0.137        76
+    2,500  0.8800   0.0139   0.0701  0.030   -0.714             -0.139       206
+    5,000  0.8364   0.0255   0.0901  0.030   -0.724             -0.216       413
+   10,000  0.7917   0.0189   0.1088  0.030   -0.716             -0.207       827
+   23,763  0.7147   0.0124   0.1350  0.030   -0.670             -0.252     1,944
+
+====================================================================================================
+P7 - observability. Sensitivity to a per-user coverage filter at the primary g = 0.
+====================================================================================================
+  'coverage' = records in the DRIFT half; the filter uses the MINIMUM of the two windows,
+  so a user must be observed in both. Thresholds are reported as a curve, not chosen:
+   min recs >=  users kept      %   top-1      ECE  r(JS,p)  r(JS,cov)  top-bin gap       n
+             0      23,763  100.0  0.7147   0.0154   -0.656     -0.215       -0.257   1,957
+            20      23,649   99.5  0.7165   0.0156   -0.656     -0.211       -0.257   1,928
+            40      23,332   98.2  0.7197   0.0161   -0.657     -0.208       -0.258   1,874
+            60      21,867   92.0  0.7270   0.0166   -0.661     -0.201       -0.260   1,710
+            80      13,975   58.8  0.7491   0.0157   -0.679     -0.221       -0.269   1,004
+           120       3,627   15.3  0.8150   0.0281   -0.670     -0.254       -0.337     163
+           160         922    3.9  0.8731   0.0213   -0.604     -0.152          nan      26
+
+  entropy-change drift is the sample-size-sensitive component; its coverage
+  dependence at g = 0, before and after conditioning on coverage decile:
+    r(d_entropy, coverage) raw = -0.040;  within-decile residual vs coverage = +0.029
+    r(d_entropy, p) raw = -0.088;  residual = -0.067
+
+saved results/sweeps_armA_dataset2.npz
