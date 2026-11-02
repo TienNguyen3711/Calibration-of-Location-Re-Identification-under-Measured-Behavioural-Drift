@@ -1,0 +1,23 @@
+Arm A, users with all four (window x half) groups: 24,517
+
+the M-half and D-half reference anchors agree for 70.2% of users (they are estimated separately to keep the halves disjoint)
+
+population drift field: novelty mass 0.007 (M half), 0.007 (D half)
+
+donors: NN matched on (cell count, offset entropy, log coverage) via lexsorted neighbour; mean |z| distance 0.249
+        RND is a random permutation; self-donor collisions in RND: 1
+
+plausibility gate: the four marginals must lie in the real target 95% band of the
+user's OWN coverage decile (B_SWAP_DESIGN §5 required the coverage-matched version)
+
+population median drift magnitude: M 0.784, D 0.785
+
+REAL  (no swap)      n=24,517  top-1 0.7113  ECE(ev) 0.0086  mean d_app 0.753  admissible 88.9%  grid-loss 0.16%
+S3    self, exact    n=24,517  top-1 0.7113  ECE(ev) 0.0090  mean d_app 0.753  admissible 88.9%  grid-loss 0.16%
+S2    NN donor       n=24,441  top-1 0.4943  ECE(ev) 0.0127  mean d_app 0.602  admissible 50.9%  grid-loss 6.62%
+S2    RND donor      n=24,431  top-1 0.4931  ECE(ev) 0.0132  mean d_app 0.599  admissible 49.2%  grid-loss 6.80%
+S2    POP field      n=24,517  top-1 0.9991  ECE(ev) 0.0005  mean d_app 0.118  admissible 0.0%  grid-loss 0.62%
+S1    NN donor       n=24,517  top-1 0.7311  ECE(ev) 0.0071  mean d_app 0.693  admissible 67.5%  grid-loss 0.34%
+S1    POP magnitude  n=24,517  top-1 0.7427  ECE(ev) 0.0118  mean d_app 0.710  admissible 58.4%  grid-loss 0.35%
+
+saved results/o3_vars.npz and results/o3_result.pkl
