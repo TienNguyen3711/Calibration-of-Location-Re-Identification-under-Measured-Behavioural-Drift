@@ -1,0 +1,67 @@
+/Users/tiennguyen/Documents/Research/papers/Paper 4/Codebase/code/scripts/matchlib.py:129: RuntimeWarning: divide by zero encountered in matmul
+  p = 1/(1 + np.exp(-np.clip(X @ w, -30, 30)))
+/Users/tiennguyen/Documents/Research/papers/Paper 4/Codebase/code/scripts/matchlib.py:129: RuntimeWarning: overflow encountered in matmul
+  p = 1/(1 + np.exp(-np.clip(X @ w, -30, 30)))
+/Users/tiennguyen/Documents/Research/papers/Paper 4/Codebase/code/scripts/matchlib.py:129: RuntimeWarning: invalid value encountered in matmul
+  p = 1/(1 + np.exp(-np.clip(X @ w, -30, 30)))
+/Users/tiennguyen/Documents/Research/papers/Paper 4/Codebase/code/scripts/matchlib.py:132: RuntimeWarning: divide by zero encountered in matmul
+  H = X.T @ (X*W[:, None])/len(y) + 1e-7*np.eye(X.shape[1])
+/Users/tiennguyen/Documents/Research/papers/Paper 4/Codebase/code/scripts/matchlib.py:132: RuntimeWarning: overflow encountered in matmul
+  H = X.T @ (X*W[:, None])/len(y) + 1e-7*np.eye(X.shape[1])
+/Users/tiennguyen/Documents/Research/papers/Paper 4/Codebase/code/scripts/matchlib.py:132: RuntimeWarning: invalid value encountered in matmul
+  H = X.T @ (X*W[:, None])/len(y) + 1e-7*np.eye(X.shape[1])
+/Users/tiennguyen/Documents/Research/papers/Paper 4/Codebase/code/scripts/matchlib.py:136: RuntimeWarning: divide by zero encountered in matmul
+  return 1/(1 + np.exp(-np.clip(np.column_stack([np.ones(len(X)), X]) @ w, -30, 30)))
+/Users/tiennguyen/Documents/Research/papers/Paper 4/Codebase/code/scripts/matchlib.py:136: RuntimeWarning: overflow encountered in matmul
+  return 1/(1 + np.exp(-np.clip(np.column_stack([np.ones(len(X)), X]) @ w, -30, 30)))
+/Users/tiennguyen/Documents/Research/papers/Paper 4/Codebase/code/scripts/matchlib.py:136: RuntimeWarning: invalid value encountered in matmul
+  return 1/(1 + np.exp(-np.clip(np.column_stack([np.ones(len(X)), X]) @ w, -30, 30)))
+S4 control. users with all four (window x half) groups: 24,517
+targets from O3: S2-NN top-1 0.4943, transported ECE 0.1609
+
+REAL world (no perturbation), to fit the calibrator that will be transported
+  top-1 0.7128   ECE(eval) 0.0123
+
+S4-ACC: bisecting one global lambda so pool top-1 matches S2-NN
+  lam 0.5000  top-1 0.7207
+  lam 0.7500  top-1 0.6886
+  lam 0.8750  top-1 0.6334
+  lam 0.9375  top-1 0.5796
+  lam 0.9688  top-1 0.5400
+  lam 0.9844  top-1 0.5146
+  lam 0.9922  top-1 0.5002
+  lam 0.9961  top-1 0.4924
+  chosen lambda 0.9941
+
+sweep: fixed lambdas, to show the whole disruption-versus-ECE curve
+  lam 0.2  top-1 0.7195  ECE_transported 0.0253
+  lam 0.4  top-1 0.7230  ECE_transported 0.0445
+  lam 0.6  top-1 0.7141  ECE_transported 0.0674
+  lam 0.8  top-1 0.6719  ECE_transported 0.0767
+  lam 1.0  top-1 0.4826  ECE_transported 0.0410
+
+==============================================================================================
+PRIMARY: transported-calibrator ECE, against S2-NN
+==============================================================================================
+  condition          n    top-1   ECE_transported
+  REAL          24,517   0.7128            0.0123
+  S4-ACC        24,517   0.4966            0.0383
+  S2-NN (O3)     6,224   0.4943            0.1609
+
+  ratio ECE(S4-ACC)/ECE(S2-NN) = 0.238
+  VERDICT: SURVIVES -- drift structure is doing the work
+
+INTEGRITY: measured drift must be unchanged by construction
+  S4-ACC       max|d_app - d_own| = 0.000e+00  OK
+
+SECONDARY: residual on d_app within S4 (must be ~0; d_app is constant by construction)
+  S4-ACC       b(d_app) = -0.0413
+
+per-bin gap by applied-drift quintile (S4-ACC), for comparison with O3 §7
+  Q1 n= 2452  mean d 0.519  gap +0.060
+  Q2 n= 2452  mean d 0.689  gap +0.043
+  Q3 n= 2451  mean d 0.784  gap -0.005
+  Q4 n= 2452  mean d 0.855  gap -0.037
+  Q5 n= 2452  mean d 0.923  gap -0.064
+
+saved results/s4_control.npz
