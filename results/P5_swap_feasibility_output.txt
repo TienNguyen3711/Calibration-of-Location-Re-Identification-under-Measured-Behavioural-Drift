@@ -1,0 +1,42 @@
+profiles: 24,529 users with both M-half windows; feasibility on 3,000
+
+1. Is the anchor-relative frame concentrated enough to transport?
+   mean offset radius (cells)       median 10.990  p25 5.581  p75 20.595
+   mass within 3 cells of anchor    median 0.427  p25 0.272  p75 0.611
+   mass within 10 cells of anchor   median 0.628  p25 0.439  p75 0.833
+
+2. Self-swap S3 (donor = the user). S2 must reproduce the user's real target.
+   exact-novelty mode: JS(synthetic, real target) median 2.90e-09  p95 1.02e-08  max 1.02e-01
+   anchor reproduced exactly: 3000/3000 (100.0%)
+   -> PASS (tolerance: p95 JS < 1e-6 and anchor exact); 4/3000 users (0.13%) exceed 1e-6, all because the
+      ratio cap of 50 binds where a donor offset has tiny reference mass and large
+      target mass. Those users are reported, not silently dropped.
+   radius-novelty mode (analysis mode) reproduces the real target only to median JS 0.693 -- by design: novel locations are resampled, so S3
+   validates the ratio and anchor machinery, not the novelty placement.
+
+3. How much of a donor's drift can actually be transported?
+   u ref mass on offsets the donor also has   median 0.290  p25 0.186  p75 0.430
+   donor novelty mass (transferred separately) median 0.558  p25 0.347  p75 0.736
+
+4. Plausibility. Do synthetic profiles fall inside the real target distribution?
+   real-target 95% reference band:
+     ncells     [11.000, 99.000]
+     entropy    [1.880, 6.285]
+     maxshare   [0.061, 0.620]
+     radius     [1.083, 48.197]
+
+   S1 magnitude swap, random donor, n = 2,999
+     inside band: ncells 72.5%  entropy 90.0%  maxshare 95.7%  radius 95.5%  | ALL FOUR 68.0%
+     applied drift vs donor's own drift: Pearson 0.625   mean applied 0.671 vs donor 0.757   (delivers 89% of donor magnitude)
+
+   S1 magnitude swap, nearest-neighbour donor, n = 3,000
+     inside band: ncells 72.5%  entropy 93.5%  maxshare 95.4%  radius 95.3%  | ALL FOUR 67.8%
+     applied drift vs donor's own drift: Pearson 0.821   mean applied 0.693 vs donor 0.751   (delivers 92% of donor magnitude)
+
+   S2 transport swap, random donor, n = 2,999
+     inside band: ncells 76.2%  entropy 83.7%  maxshare 76.9%  radius 97.0%  | ALL FOUR 65.2%
+     applied drift vs donor's own drift: Pearson 0.908   mean applied 0.605 vs donor 0.757   (delivers 80% of donor magnitude)
+
+   S2 transport swap, nearest-neighbour donor, n = 3,000
+     inside band: ncells 74.3%  entropy 80.8%  maxshare 74.2%  radius 96.0%  | ALL FOUR 63.8%
+     applied drift vs donor's own drift: Pearson 0.899   mean applied 0.602 vs donor 0.751   (delivers 80% of donor magnitude)
