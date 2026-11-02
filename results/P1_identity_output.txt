@@ -1,0 +1,64 @@
+=== armA_dataset2 ===
+users with an M-half profile in all five windows: 23,846; using 8,000
+
+Self-similarity of the SAME uid across consecutive windows, vs a shuffled-pair null
+  pair       self median  self p05  null median  null p95  self<null med
+  W0->W1          0.6263    0.2898       0.0000    0.0294          0.00%
+  W1->W2          0.6466    0.3057       0.0000    0.0282          0.00%
+  W2->W3          0.6297    0.2960       0.0000    0.0274          0.00%
+  W3->W4          0.5161    0.1649       0.0000    0.0249          0.00%
+
+Shape of the decline: a recycled id gives an isolated break, drift gives a gradual slope.
+  break pattern (one pair below the null median, other three > 0.5): 0 / 8,000 = 0.00%
+  break pattern (one pair below the null median, other three > 0.6): 0 / 8,000 = 0.00%
+  break pattern (one pair below the null median, other three > 0.7): 0 / 8,000 = 0.00%
+  users with EVERY pair below the null median (unusable regardless of cause): 0 / 8,000 = 0.00%
+
+Where the weakest link falls (a mid-period re-pseudonymisation would cluster; the
+W3->W4 pair is the shock boundary, so mass there is expected and is NOT evidence of recycling):
+  weakest pair = W0->W1:  15.2%
+  weakest pair = W1->W2:   8.1%
+  weakest pair = W2->W3:  10.0%
+  weakest pair = W3->W4:  66.8%
+
+VERDICT: the bound above is an upper bound on pseudonym recycling. P1 stays an
+assumption; what changes is that its failure mode is now quantified, not unexamined.
+=== armB_dataset1 ===
+users with an M-half profile in all five windows: 97,507; using 8,000
+
+Self-similarity of the SAME uid across consecutive windows, vs a shuffled-pair null
+  pair       self median  self p05  null median  null p95  self<null med
+  W0->W1          0.6383    0.3053       0.0000    0.0270          0.00%
+  W1->W2          0.6583    0.3278       0.0000    0.0285          0.00%
+  W2->W3          0.6431    0.3100       0.0000    0.0293          0.00%
+  W3->W4          0.6472    0.3149       0.0000    0.0290          0.00%
+
+Shape of the decline: a recycled id gives an isolated break, drift a gradual slope.
+  the null is degenerate -- random pairs share almost no support, so the null MEDIAN is
+  0.0000 and nothing can fall below it. The usable reference is the null p95
+  (0.0284 mean over the four pairs) and absolute levels.
+
+  distribution of each user's WEAKEST consecutive-window self-similarity:
+    p01 0.149  p05 0.250  p25 0.435  p50 0.575
+
+  threshold                             users    share
+  weakest pair below null p95 (mean over pairs)        8    0.10%
+  weakest pair below 5x null p95            74    0.92%
+  weakest pair below absolute 0.05          13    0.16%
+  weakest pair below absolute 0.10          31    0.39%
+
+  BREAK pattern = weakest pair below 0.10 while the other three stay above a floor:
+    other three > 0.3: 10 / 8,000 = 0.125%
+    other three > 0.4: 6 / 8,000 = 0.075%
+    other three > 0.5: 5 / 8,000 = 0.062%
+  users whose EVERY pair is below 0.10: 0 / 8,000 = 0.000%
+
+Where the weakest link falls (a mid-period re-pseudonymisation would cluster; the
+W3->W4 pair is the shock boundary, so mass there is expected and is NOT evidence of recycling):
+  weakest pair = W0->W1:  32.1%
+  weakest pair = W1->W2:  17.2%
+  weakest pair = W2->W3:  24.4%
+  weakest pair = W3->W4:  26.3%
+
+VERDICT: the bound above is an upper bound on pseudonym recycling. P1 stays an
+assumption; what changes is that its failure mode is now quantified, not unexamined.
