@@ -1,0 +1,14 @@
+path,dataset,licence,usable_paper4,bytes_h,sha256,rows,unique_uid,d_range,t_range,xy_range,notes
+raw/yjmob100k/yjmob100k-dataset1.csv.gz,yjmob100k,CC BY 4.0,yes,400M,fdf3d6bc8415debdca5fae1d9184a8e41743ca43528e2b7b050f114cb65b9551,111535175,100000,0..74,0..47,1..200,business-as-usual 75 days; matches Data Descriptor exactly
+raw/yjmob100k/yjmob100k-dataset2.csv.gz,yjmob100k,CC BY 4.0,yes,106M,f477b3defb9511f8d326d7673eb1f436e36c7a136e49688557fcfabfcb28bb4e,29389749,25000,0..74,0..47,1..200,60 normal days + 15 emergency days (days 60-74); matches Data Descriptor exactly
+raw/yjmob100k/cell_POIcat.csv.gz,yjmob100k,CC BY 4.0,yes,612K,8d6a284896a95e49ebafddc06f583a4f61cd66ccb089cf985f3ec589bf348533,221159,,,,1..200,POI counts per cell; header x,y,POIcategory,POI_count
+raw/yjmob100k/POI_datacategories.csv,yjmob100k,CC BY 4.0,yes,4.0K,93296e7594070c3198e6f06a16b4942344fe2899fec27c363b0e5e00b8e14f89,85,,,,,85 POI category names; no header; UTF-8 BOM on first line
+raw/geolife/Geolife Trajectories 1.3/,geolife,MSR non-commercial (unconfirmed),yes,1.6G,,24876978 (per User Guide),182,2007-04..2012-08,,,"182 users, 18670 .plt files, 69 labels.txt; see SOURCE.md"
+raw/_QUARANTINE_humob2024_4cities/city_A_alldata.csv.gz,humob2024,CC BY 4.0 + no-reidentification,NO,342M,5133d72fe9dfdd97d0f29b6e4ab4be12a3d8672b91681a282527a6ae1b8bea90,87042418,150000,1..75,0..47,1..200,quarantined; terms forbid re-identification
+raw/_QUARANTINE_humob2024_4cities/city_B_alldata.csv.gz,humob2024,CC BY 4.0 + no-reidentification,NO,69M,fd1cbd80cd27f8e42dcbc3052e2ee53661733551cf31485236e37f79493a6764,18196993,30000,1..75,0..47,1..200,quarantined
+raw/_QUARANTINE_humob2024_4cities/city_C_alldata.csv.gz,humob2024,CC BY 4.0 + no-reidentification,NO,56M,b6cba1709b4b83dd59c9af96a035511a6fa417319f051a35f6fe68af534f9ab8,14475147,25000,1..75,0..47,1..200,quarantined
+raw/_QUARANTINE_humob2024_4cities/city_D_alldata.csv.gz,humob2024,CC BY 4.0 + no-reidentification,NO,45M,f59d409b234b9ed69649849b96ff22ae412f115338b2a0a00448cc6fbda08328,12030078,20000,1..75,0..47,1..200,quarantined
+raw/_QUARANTINE_humob2024_4cities/POIdata_cityA.csv,humob2024,CC BY 4.0 + no-reidentification,NO,2.7M,f05fea263198b31ad42c2aea679f589879719fc6fa763aacd85068e4926ff148,220954,,,,1..200,quarantined
+raw/_QUARANTINE_humob2024_4cities/POIdata_cityB.csv,humob2024,CC BY 4.0 + no-reidentification,NO,656K,8edad19a7a77c82b068a8f86ad6127cb14d0bb393543160f597fb8bd78cd1c2d,52924,,,,1..200,quarantined
+raw/_QUARANTINE_humob2024_4cities/POIdata_cityC.csv,humob2024,CC BY 4.0 + no-reidentification,NO,644K,4fcf92b5caf3e5f9e180eec5bd879e25c40fd03a4dde6a026dddc321e12a3488,49199,,,,1..200,quarantined
+raw/_QUARANTINE_humob2024_4cities/POIdata_cityD.csv,humob2024,CC BY 4.0 + no-reidentification,NO,832K,4aadaddeef1076574450dfb918c39a82c25dbe4d16656b6ec376f402e658fbd5,65435,,,,1..200,quarantined

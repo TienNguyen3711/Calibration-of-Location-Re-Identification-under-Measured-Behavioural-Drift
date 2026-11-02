@@ -1,0 +1,78 @@
+# GeoLife Trajectories 1.3 — source and verification
+
+## Provenance
+- Microsoft Research Asia, GeoLife project. Microsoft download id 52367.
+- Collected April 2007 - August 2012, 182 users, mostly Beijing.
+- **No licence file ships with the archive**; `User Guide-1.3.pdf` has no licence section.
+  See `../../LICENCES.md` section 2 for the full position. Treat as non-commercial research use,
+  cite the three papers the guide asks for, and do not redistribute.
+- The User Guide names **location privacy** among the intended research fields, which covers
+  Paper 4's use.
+
+## Layout
+```
+Geolife Trajectories 1.3/
+├── User Guide-1.3.pdf        (3 pages)
+└── Data/<uid>/               (182 folders, uid "000".."181")
+    ├── Trajectory/*.plt      (file name = start time YYYYMMDDHHMMSS)
+    └── labels.txt            (only 69 of the 182 users)
+```
+
+`.plt` format: 6 header lines to skip, then one point per line:
+`lat,lon,0,altitude_ft,days_since_1899-12-30,YYYY-MM-DD,HH:MM:SS`.
+Altitude `-777` means invalid. Times are GMT.
+`labels.txt` is tab-separated: `Start Time`, `End Time`, `Transportation Mode`.
+
+## Verified on 2026-11-01
+- 182 user folders, **18,670** `.plt` files — both match the User Guide's figures for v1.3.
+- 69 `labels.txt` files. The User Guide says "73 users have labeled their trajectories", so **69 vs
+  73 is a real discrepancy**; the files are the authority here.
+- Timestamps parsed from file names span 2000-01-01 to 2012-07-27. Exactly **one** file falls
+  outside the documented collection period: `163/Trajectory/20000101231219.plt`, whose contents are
+  genuinely dated 2000-01-01 (a GPS logger that had lost its clock). Drop or re-date it.
+
+## Per-user coverage — this constrains the design
+
+| | min | median | max |
+|---|---|---|---|
+| span (last - first day) | 0 | 69 | 4,590 |
+| distinct active days | 1 | 19 | 1,245 |
+
+| threshold | users with span ≥ | users with active days ≥ |
+|---|---|---|
+| 30 days / 10 active days | 118 | 121 |
+| 90 days / 30 active days | 78 | 74 |
+| 180 days / 60 active days | 41 | 47 |
+| 365 days / 121 active days | 18 | 18 |
+| 730 days / 243 active days | 10 | 8 |
+
+The median user has only **19 active days**, so most of the 182 users cannot supply a reference
+window, a gap and a target window. A design needing (for example) 4 weeks of reference plus 4 weeks
+of target with real coverage in both will keep roughly **40-80 users**, depending on how strict the
+per-window coverage rule is. The exact number must be computed by the build script, not assumed.
+
+Richest users (uid, trajectories, first, last, span days, active days, has labels):
+
+```
+153  2024  2007-07-21  2012-06-17  1793  1245  yes
+128  2153  2007-04-14  2011-03-10  1426   900  yes
+163   809  2000-01-01  2012-07-27  4590   537  yes
+144   610  2008-04-28  2009-09-24   513   313  yes
+085   427  2008-02-13  2009-09-28   592   277  yes
+068   408  2008-09-14  2009-09-13   363   273  yes
+167   385  2008-03-01  2009-02-17   352   259  yes
+004   395  2008-10-23  2009-07-29   278   246  no
+```
+
+GeoLife's role in Paper 4 is therefore the **small-n, long-span, natural-drift** case, complementing
+YJMob100K's large-n, short-span, labelled-shift case. Statements about GeoLife must carry the small
+sample size explicitly.
+
+## Note
+`papers/Paper 1/Codebase/code/Geolife Trajectories 1.3/` holds a second, independent copy of the
+same 1.6 GB (same 182 users and 18,670 files, separate inodes). Papers are kept independent in this
+project, so this is not an error. If the 1.6 GB matters, the two could be hard-linked, but that
+couples the two papers' working copies and is not recommended.
+
+## Re-download
+<https://www.microsoft.com/en-us/download/details.aspx?id=52367>

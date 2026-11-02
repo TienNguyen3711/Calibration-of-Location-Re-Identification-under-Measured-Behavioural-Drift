@@ -1,0 +1,47 @@
+# Datasets stay out of git. Their documentation does not: provenance, licences
+# and checksums must be versioned even though the bytes are not.
+data/**
+!data/README.md
+!data/LICENCES.md
+!data/MANIFEST.csv
+!data/raw/
+!data/raw/yjmob100k/
+!data/raw/yjmob100k/SOURCE.md
+!data/raw/geolife/
+!data/raw/geolife/SOURCE.md
+!data/raw/_QUARANTINE_humob2024_4cities/
+!data/raw/_QUARANTINE_humob2024_4cities/DO_NOT_USE.md
+
+# Build artefacts and environments
+.venv/
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# OS
+.DS_Store
+
+# ---------------------------------------------------------------------------
+# Derived result artefacts are EXCLUDED FOR ETHICS REASONS, not only for size.
+#
+# Every results/*.npz and results/*.pkl holds PER-USER arrays over the 24,517
+# released pseudonyms: whether each person was re-identified correctly (y), the
+# attack's confidence about them (p_platt, p_soft), their measured drift
+# (comp, dec_*), their rarity (a_pop, a_knn, a_maha) and their per-condition
+# swap outcomes. Codebase/paper/ETHICS.md section 5 commits this project to
+# publishing "no per-user output of any kind ... no per-user drift values".
+# Publishing these files would break that commitment.
+#
+# results/precheck_agg_*.tsv are aggregates, but ~29,000 of their rows are
+# ABSOLUTE CELL COORDINATES with visit counts -- the spatial density signature
+# of a city the release deliberately does not name. A published preprint
+# (arXiv:2506.05611) recovered that city's geographic frame from exactly such
+# density signatures, so these files are withheld as well.
+#
+# The written record (results/*.md) and the console transcripts
+# (results/*_output.txt) carry no per-user rows and no cell coordinates; both
+# were checked before the first push. Each results/*.md states the commands
+# that regenerate its artefacts from the raw data.
+results/*.npz
+results/*.pkl
+results/*.tsv
