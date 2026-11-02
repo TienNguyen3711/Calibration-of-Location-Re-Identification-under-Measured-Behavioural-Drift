@@ -1,0 +1,20 @@
+=== second matcher family: armB_dataset1 ===
+pool 24,517  cal 12,258  eval 12,259
+
+primary (cells)        vocab  23,768  top-1 0.9077  ECE 0.0046  Brier 0.0521
+stbands (cell x 6h)    vocab  79,387  top-1 0.9043  ECE 0.0081  Brier 0.0555
+binary (presence)      vocab  23,768  top-1 0.7270  ECE 0.0111  Brier 0.1284
+
+reliability by DRIFT quintile (eval users), gap = accuracy - mean confidence
+  family                       Q1       Q2       Q3       Q4       Q5    dcECE
+  primary (cells)          +0.002   +0.006   +0.011   +0.007   -0.036   0.0158
+  stbands (cell x 6h)      +0.002   +0.013   +0.015   +0.009   -0.037   0.0178
+  binary (presence)        -0.010   +0.010   +0.028   +0.019   -0.034   0.0280
+
+PRIMARY ENDPOINT: C2b increment, dAUC of drift beyond confidence and coverage
+  family                     dAUC                95% CI
+  primary (cells)         -0.0009  [-0.0045,+0.0027]
+  stbands (cell x 6h)     +0.0022  [-0.0014,+0.0060]
+  binary (presence)       -0.0008  [-0.0015,-0.0000]  CI excludes 0
+
+saved results/family2_armB_dataset1.npz
