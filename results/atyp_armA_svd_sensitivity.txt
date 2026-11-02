@@ -1,0 +1,14 @@
+########## svd_dim = 256 ##########
+a_maha  single Gaussian, tied cov, d = 256 (SVD captures 0.165 of reference energy); mean 214.5 median 187.0
+T2 - PRIMARY. Nested dAUC on eval users. base = [z(p_platt), z(log coverage)],
+  atypicality (all 3) | base                      -0.0001  [-0.0014,+0.0011]
+  drift | base   [the published C2b number]       +0.0307  [+0.0264,+0.0348]  CI excludes 0
+  *** drift | base + atypicality  PRIMARY         +0.0559  [+0.0508,+0.0611]  CI excludes 0
+  a_maha | base                                   +0.0008  [+0.0003,+0.0012]  CI excludes 0
+########## svd_dim = 512 ##########
+a_maha  single Gaussian, tied cov, d = 512 (SVD captures 0.242 of reference energy); mean 413.7 median 375.3
+T2 - PRIMARY. Nested dAUC on eval users. base = [z(p_platt), z(log coverage)],
+  atypicality (all 3) | base                      -0.0010  [-0.0023,+0.0004]
+  drift | base   [the published C2b number]       +0.0307  [+0.0264,+0.0348]  CI excludes 0
+  *** drift | base + atypicality  PRIMARY         +0.0561  [+0.0509,+0.0615]  CI excludes 0
+  a_maha | base                                   +0.0005  [+0.0001,+0.0009]  CI excludes 0
